@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { Input } from './form/Input';
+import { DisplayTask } from './form/DisplayTask';
 
 export function TodoList() {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState('');
 
-  const handleInputChange = (event) => {
+  const handleInput = (event) => {
     setNewTask(event.target.value);
   };
 
@@ -21,17 +22,8 @@ export function TodoList() {
 
   return (
     <div>
-      <Input newTask={newTask} handleInputChange={handleInputChange} addTask={addTask} />
-      <ul>
-        {tasks.map((task, index) => (
-          <li key={index}>
-            <div className='flex items-center space-x-4'>
-              <p>{task}</p>
-              <button onClick={() => deleteTask(index)}>Supprimer</button>
-            </div>
-          </li>
-        ))}
-      </ul>
+      <Input newTask={newTask} handleInputChange={handleInput} addTask={addTask} />
+      <DisplayTask tasks={tasks} deleteTask={deleteTask} />
     </div>
   );
 }
